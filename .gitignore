@@ -1,0 +1,7 @@
+# phpstorm project files
+.idea
+
+# composer vendor dir
+/node_modules
+/bower_components
+/dist

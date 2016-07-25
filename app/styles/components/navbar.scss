@@ -1,0 +1,23 @@
+.navbar{
+    .nav>li>a:focus, .nav>li>a:hover {
+        text-decoration: none;
+        background-color: transparent;
+    }
+    .nav>li>a:active{
+        background-color: #f0f0f0;
+    }
+
+    padding: 10px 0;
+    min-height: inherit;
+    background-color: #ffffff;
+    border-top: 1px solid #1504fa; /* Линия сверху текста */
+    border-bottom: 1px solid #1504fa; /* Линия снизу текста */
+    a{
+        white-space: nowrap;
+        color: #000000;
+        font-size: 14pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+    }
+}

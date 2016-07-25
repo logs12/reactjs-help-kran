@@ -1,0 +1,6 @@
+@mixin borderRadius($hl, $hr, $bl, $br){
+    -moz-border-radius: $hl $hr $bl $br; /* закругление для старых Mozilla Firefox */
+    -webkit-border-radius: $hl $hr $bl $br; /* закругление для старых Chrome и Safari */
+    -khtml-border-radius:$hl $hr $bl $br; /* закругл. для браузера Konquerer системы Linux */
+    border-radius: $hl $hr $bl $br; /* закругление углов для всех, кто понимает */
+}
