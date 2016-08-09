@@ -1,32 +1,51 @@
 'use strict';
-const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const path = require('path'),
-    webpack = require('webpack');
+const webpack = require('webpack');
+
 
 module.exports = {
-    entry: [
-        "./app/app.js"
-    ],
+    // точки входа
+    entry: ["./src/app.js"],
+
+    // то, что получим на выходе
     output: {
-        filename: "./dist/bundle.js",
-        //sourceMapFilename: "./dist/bundle.js.map"
+        path: __dirname + '/public/build/',
+        publicPath: "build/",
+        filename: "bundle.js"
     },
     devtool: '#source-map',
     module: {
         loaders: [
             {
-                
+                /*
+                 компоненты reactjs написаны с использованием JSX разметки и классов, которые доступны только в es6,
+                 чтобы итоговый js был понят браузерами, нужно привести его в нормальный вид, за это отвечает транспайлер babel,
+                 который преобразует jsx разметку в обычный js, а так же код стандарта es6 преобразует в код стандарта es5
+                 */
                 loader: 'babel',
-                test: /\.js?$/,
-                exclude: /(node_modules|bower_components)/,
-                query: {
-                    presets: ['react', 'es2015', 'stage-2']
-                }
+                test: /\.js$/,
+                exclude: [/node_modules/, /bower_components/, /public/, /gulpfile.js/]
+            },
+            {
+                test: /\.jsx$/,
+                loader: "react-hot!babel",
+                exclude: [/node_modules/, /bower_components/, /public/]
             }
         ]
     },
+    
+    /* Конфиг для webpack-dev-server*/
+    devServer: {
+        host: 'help-kran.loc',
+        port: 8080,
+        contentBase: __dirname + '/public',
+        devtool: 'eval-source-map'
+        // все пути к статике которые WDS не нашел(катинки и т.п.) отдаются на
 
+       /* proxy: {
+            '*': 'http://help-kran.loc/'
+        }*/
+    }
   /*  plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
@@ -38,8 +57,4 @@ module.exports = {
         })
     ],*/
 
-    resolve: {
-        root: path.resolve('./app'),
-        extenstions: ['', '.js']
-    }
 }

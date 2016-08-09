@@ -20,21 +20,21 @@ var gulp = require('gulp'),
             fonts: 'dist/fonts/'
         },
         src: { //Пути откуда брать исходники
-            js: 'app/app.js',
-            style: 'app/styles/main.scss',
-            img: 'app/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
-            fonts: 'app/fonts/**/*.*'
+            js: 'src/app.js',
+            style: 'src/styles/main.scss',
+            img: 'src/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
+            fonts: 'src/fonts/**/*.*'
         },    
         watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
             js: [
-                'app/*.js',
-                'app/components/*.js',
-                'app/components/photos/*.js',
-                'app/layouts/*.js'
+                'src/*.js',
+                'src/components/*.js',
+                'src/components/photos/*.js',
+                'src/layouts/*.js'
             ],
-            style: 'app/styles/**/*.scss',
-            img: 'app/img/**/*.*',
-            fonts: 'app/fonts/**/*.*'
+            style: 'src/styles/**/*.scss',
+            img: 'src/img/**/*.*',
+            fonts: 'src/fonts/**/*.*'
         },
         clean: './dist'
     };
