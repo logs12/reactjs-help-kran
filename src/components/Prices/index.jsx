@@ -32,13 +32,26 @@ export default class Prices extends Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log(e);
-        let name = this.state.name.trim(),
-            phone = this.state.phone.trim(),
-            email = this.state.email.trim(),
-            text = this.state.text.trim();
+        let data = {
+            name: this.state.name.trim(),
+            phone: this.state.phone.trim(),
+            email: this.state.email.trim(),
+            text: this.state.text.trim()
+        };
         console.log('wedwedwed1111qqqqq');
         let formObj = new FormValidation('form-prices', true, 'bootstrap');
-
+        if (formObj.resultValidation) {
+            $.ajax({
+                url: '/server/mail.php',
+                data: data,
+                async: false,
+                success: function(data) {
+                    alert(2222);
+                    console.log(data);
+                }
+            });
+        }
+        console.log('formObj = ', formObj.resultValidation);
         console.log(`
             name = ${name}
             phone = ${phone}

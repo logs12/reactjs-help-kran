@@ -14,39 +14,42 @@ export default class FormValidation {
      * @param frameWork
      */
     constructor (id, errMsg = false, frameWork = undefined) {
-        this.fraimWork = frameWork;
+        this.frameWork = frameWork;
         this.formObj = $('form#'+id);
-        console.log('formObj = ', this.formObj);
         this.errTextMessage = {
             empty: 'Пожалуйста заполните поле!',
             email: 'Пожалуйста введите корректный email аддрес',
             phone: 'Пожалуйста введите корректный номер телефона'
         };
         this.errFields = {};
+        this.resultValidation;
         this.outputResult();
     }
+
 
     /**
      * output result validation after ajax
      * @param res
      */
     outputResult() {
-        if (this.validate)
+        if (this.validate())
         {
             this.clearOutputResult();
             //this.resetForm();
+            this.resultValidation = true;
         }
         else
         {
             this.clearOutputResult();
-            for (var key in res.ERROR_FIELDS) {
-                var el = this.getElement(key);
-                this.setError(el);
+            for (let val in this.errFields) {
+
+                this.setError(this.errFields[val]['dom']);
             }
-            this.errMessage(res.ERROR_FIELDS)
+            this.errMessage();
+            this.resultValidation = false;
         }
     }
-
+    
     /**
      *  clear result validation
      */
@@ -94,8 +97,6 @@ export default class FormValidation {
      * valid phone
      */
     validPhone(el) {
-
-        console.log('validPhone');
         var res = 0;
         if (el.val() != '') {
 
@@ -116,11 +117,12 @@ export default class FormValidation {
     validate() {
         this.formObj.find(this.errorClass).removeClass(this.errorClass);
         let err = 0;
-        let el = $(this.formObj).find('input,select,textarea').each((i,field) => {
+        $(this.formObj).find('input,select,textarea').each((i,field) => {
+            
             field = $(field);
             let fieldValid = field.attr('data-required');
             let fieldName = field.attr('type');
-
+            this.errFields[fieldName] = {};
             /* если у поля есть атрибут data-required, то валидируем */
             if (fieldValid !== undefined) {
                 let fieldValidArr = field.attr('data-required').split(' ');
@@ -130,20 +132,23 @@ export default class FormValidation {
                         case 'empty':
                         {
                             if (this.validEmpty(field)) {
-                                this.errFields[fieldName] = this.errTextMessage['empty'];
+                                this.errFields[fieldName].text = this.errTextMessage['empty'];
+                                this.errFields[fieldName].dom = field;
                                 err += this.validEmpty(field);
                             }
                             break;
                         }
                         case 'phone':
                             if (this.validPhone(field)) {
-                                this.errFields[fieldName] = this.errTextMessage[fieldName];
+                                this.errFields[fieldName].text = this.errTextMessage[fieldName];
+                                this.errFields[fieldName].dom = field;
                                 err += this.validPhone(field);
                             }
                             break;
                         case 'email':
                             if (this.validEmail(field)) {
-                                this.errFields[fieldName] = this.errTextMessage[fieldName];
+                                this.errFields[fieldName].text = this.errTextMessage[fieldName];
+                                this.errFields[fieldName].dom = field;
                                 err += this.validEmail(field);
                             }
                             break;
@@ -151,47 +156,39 @@ export default class FormValidation {
                 });
             }
         });
-        console.log('err = ',err);
-        console.log(this.errFields);
         if (err>0) return false;
         else return true;
     }
-
+    
     /**
      *  add class "error" for element's form
      *  @param el = object date form
      */
     setError(el) {
-
-        if (typeof this.fraimWork == 'undefined')
-            el.addClass(this.errorClass);
-        else if(this.fraimWork == 'bootstrap')
-            el.closest('.form-group').addClass(this.errorClass);
+        if (typeof this.frameWork == 'undefined') {
+            $(el).addClass(this.errorClass());
+        }
+        else if(this.frameWork == 'bootstrap')
+            $(el).closest('.form-group').addClass(this.errorClass());
     }
 
     /**
      * Функция вывода сообщений об ошибках
      * @param errObj - объект с ошибками
      */
-    errMessage(errObj) {
-        debugger;
-        if (this.errTextMessage){
+    errMessage() {
+        if (this.errFields){
             this.formObj.find('.control-label').remove();
-            for (let error in this.errTextMessage)
+            for (let nameField in this.errFields)
             {
                 var span = $("<span/>", {
-                    text: function() {
-                        for (var i in this.errFields) {
-                            return this.errFields[i];
-                            break;
-                        }
-                    },
+                    text: this.errFields[nameField]['text'],
                     class: 'control-label'
                 }).css({
                     fontSize: '10px',
                     fontWeight: 'bold'
                 });
-                this.formObj.find("input[name = "+error+"]").after(span);
+                $(this.errFields[nameField]['dom']).after(span);
             }
         }
     }
@@ -202,8 +199,8 @@ export default class FormValidation {
      */
     errorClass() {
         var nameClass = '';
-        if (typeof this.fraimWork == 'undefined') nameClass = 'error';
-        else if(this.fraimWork == 'bootstrap') nameClass = 'has-error';
+        if (typeof this.frameWork == 'undefined') nameClass = 'error';
+        else if(this.frameWork == 'bootstrap') nameClass = 'has-error';
         return nameClass;
     }
 
