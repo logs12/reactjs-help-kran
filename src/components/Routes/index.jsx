@@ -13,6 +13,7 @@ import About from '../About/index.jsx';
 import NotFound from '../NotFound/index.jsx';
 import Photos from '../Photos/index.jsx';
 
+const PathImages = 'public/assets/img/';
 const Photo = [
     {
         'name' : 'runway',
@@ -56,6 +57,11 @@ const Photo = [
 const HomeWithProps = (props) => {
     return (<Home {...props} photo={Photo}/>);
 }
+
+const ExamplesWithProps = (props) => {
+    return (<Examples {...props} photo={Photo} pathImages={PathImages} />);
+}
+
 const PhotosWithProps = (props) => {
     return (<Photos {...props} photo={Photo}/>);
 }
@@ -64,7 +70,7 @@ export const Routes = (
     <div>
         <Route path='/' component={App}>
             <IndexRoute component={HomeWithProps}/>
-            <Route path="examples" component={Examples}/>
+            <Route path="examples" component={ExamplesWithProps}/>
             <Route path="prices" component={Prices}/>
             <Route path="about" component={About}/>
             <Route path=":album" component={PhotosWithProps}/>
