@@ -51,8 +51,10 @@ module.exports = {
     devServer: {
         host: 'help-kran.loc',
         port: 8080,
-        contentBase: __dirname + '/public',
-        devtool: 'eval-source-map'
+        //contentBase: __dirname + '/public',
+        contentBase: './',
+        devtool: 'eval-source-map',
+        historyApiFallback: true
         // все пути к статике которые WDS не нашел(катинки и т.п.) отдаются на
 
        /* proxy: {
