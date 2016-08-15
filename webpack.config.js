@@ -9,8 +9,8 @@ module.exports = {
 
     // то, что получим на выходе
     output: {
-        path: __dirname + '/public/build/',
-        publicPath: "build/",
+        path: __dirname + '/build/',
+        publicPath: "/",
         filename: "bundle.js"
     },
     devtool: '#source-map',
@@ -30,10 +30,23 @@ module.exports = {
                 test: /\.jsx$/,
                 loader: "react-hot!babel",
                 exclude: [/node_modules/, /bower_components/, /public/]
+            },
+            {
+                test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+                loader: 'file?name=[path][name].[ext]'
+            },
+            {
+                test   : /\.css$/,
+                loaders: ['style', 'css', 'resolve-url']
+            },
+            {
+                test   : /\.scss$/,
+                loaders: ['style', 'css', 'resolve-url', 'sass?sourceMap']
             }
         ]
+
     },
-    
+
     /* Конфиг для webpack-dev-server*/
     devServer: {
         host: 'help-kran.loc',

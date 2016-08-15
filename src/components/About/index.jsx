@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+
+import './style.scss';
 
 export default React.createClass({
     render: function() {
         return (
-            <div>
+            <div id="about">
                 <p>
                     Наша компания занимается кранами, подкрановыми путями и техническим обслуживанием уже на протяжении 5 лет.
                     Наши заказчики поручают нам работы от самых простых, до самых сложных, вне зависимости от географического местонахождения объектов и климатических условий.
@@ -13,16 +15,16 @@ export default React.createClass({
                     Мы работаем с кранами:
                 </p>
                 <ul>
-                    <li>Мостовые</li>
-                    <li>Козловые</li>
-                    <li>Опорного типа</li>
-                    <li>Подвесного типа</li>
-                    <li>Однобалочными</li>
-                    <li>Двух балочными</li>
-                    <li>Подкрановыми путями</li>
-                    <li>Подвесного типа</li>
-                    <li>Опорного типа</li>
-                    <li>Наземного типа</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Мостовые</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Козловые</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Опорного типа</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Подвесного типа</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Однобалочными</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Двух балочными</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Подкрановыми путями</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Подвесного типа</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Опорного типа</li>
+                    <li><i className="glyphicon glyphicon-ok"></i> Наземного типа</li>
                 </ul>
                 <p>
                     Выполняем работы по нивелировке и рихтовке подкрановых путей любого типа.

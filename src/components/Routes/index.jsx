@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
-import { render } from 'react-dom'
+import { render } from 'react-dom';
+
 
 // Layouts
 import App from '../../layouts/app';
@@ -13,7 +14,7 @@ import About from '../About/index.jsx';
 import NotFound from '../NotFound/index.jsx';
 import Photos from '../Photos/index.jsx';
 
-const PathImages = 'public/assets/img/';
+const PathImages = 'build/img/';
 const Photo = [
     {
         'name' : 'runway',
@@ -54,21 +55,25 @@ const Photo = [
 
 ];
 
+const AppWithProps = (props) => {
+    return (<App {...props} pathImages={PathImages}/>);
+};
+
 const HomeWithProps = (props) => {
-    return (<Home {...props} photo={Photo}/>);
-}
+    return (<Home {...props} photo={Photo} pathImages={PathImages}/>);
+};
 
 const ExamplesWithProps = (props) => {
     return (<Examples {...props} photo={Photo} pathImages={PathImages} />);
-}
+};
 
 const PhotosWithProps = (props) => {
-    return (<Photos {...props} photo={Photo}/>);
-}
+    return (<Photos {...props} photo={Photo} pathImages={PathImages}/>);
+};
 
 export const Routes = (
     <div>
-        <Route path='/' component={App}>
+        <Route path='/' component={AppWithProps}>
             <IndexRoute component={HomeWithProps}/>
             <Route path="examples" component={ExamplesWithProps}/>
             <Route path="prices" component={Prices}/>
@@ -77,4 +82,4 @@ export const Routes = (
         </Route>
         <Route path='*' component={NotFound}/>
     </div>
-)
+);

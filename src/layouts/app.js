@@ -5,13 +5,15 @@ import Footer from './footer';
 
 export default class App extends Component{
     render()  {
+
+        let pathImg= `${this.props.pathImages}logo.png`;
         return (
             <div className="app">
                 <header>
                     <div className="container">
                         <div className="row">
                             <div className="left col-md-8">
-                                <img src="public/assets/img/logo.png" />
+                                <Link to="/"><img src={pathImg} /></Link>
                             </div>
                             <div className="right col-md-4">
                                 <p>г.Нижний Новгород</p>

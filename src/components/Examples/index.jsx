@@ -1,3 +1,5 @@
+import './style.scss';
+
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
@@ -9,7 +11,7 @@ export default class Examples extends Component{
                 let url = `/${item.name}`;
                 let urlNext = `/${arr[index + 1].name}`;
                 let album = item.name;
-                let urlimage = `public/assets/img/${album}/${arr[index + 1].photos[0]}`;
+                let urlimage = `${this.props.pathImages}${album}/${arr[index + 1].photos[1]}`;
                 return (
                     <div className="row" key={index} >
                         <Link to={url}>

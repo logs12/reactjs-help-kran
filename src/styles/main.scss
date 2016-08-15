@@ -1,7 +1,6 @@
 @import "partials/_customVariables.scss";
 @import "partials/_base.scss";
-@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 * {
     margin: 0;
     padding: 0;
@@ -57,7 +56,6 @@ body {
             .carousel{
                 margin-top: 20px;
             }
-            @import 'components/photos';
         }
         footer{
             position: absolute;

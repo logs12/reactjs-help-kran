@@ -10,8 +10,8 @@ export default class Slider extends Component {
         let album = this.props.album;
         let idCarousel = 'carousel-'+album;
         let attr = '#carousel-'+album;
-        let slaids = data.map(function(item,index){
-            let url = 'public/assets/img/' + album + '/' + item;
+        let slaids = data.map((item,index) => {
+            let url = `${this.props.pathImages}${album}/${item}`;
             let activeClass = 'item';
             activeClass = (index == 0) ? activeClass = 'active item' : 'item';
             return (

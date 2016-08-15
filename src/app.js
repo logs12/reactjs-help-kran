@@ -3,6 +3,9 @@ import React from 'react';
 import { Router, browserHistory, hashHistory} from 'react-router';
 import { Routes } from './components/Routes/index.jsx';
 
+
+import './styles/main.scss';
+
 ReactDOM.render(
     <Router history={browserHistory} routes={Routes} />,
     document.getElementById('root')

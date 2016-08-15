@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './style.scss';
+
 export default class Photos extends Component {
 
     /**
@@ -30,8 +32,8 @@ export default class Photos extends Component {
         return this.photo.map((item, index, arr) => {
             if (index % 2 == 0) {
 
-                let url = `public/assets/img/${this.album}/${item}`;
-                let urlNext = `public/assets/img/${this.album}/${arr[index + 1]}`;
+                let url = `${this.props.pathImages}${this.album}/${item}`;
+                let urlNext = `${this.props.pathImages}${this.album}/${arr[index + 1]}`;
 
                 return (
                     <div className="photos row" key={index}>
